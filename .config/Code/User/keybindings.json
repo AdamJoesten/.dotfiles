@@ -1,0 +1,37 @@
+// Place your key bindings in this file to override the defaultsauto[]
+[
+    {
+        "key": "ctrl+alt+p",
+        "command": "prettier.forceFormatDocument"
+    },
+    {
+        "key": "ctrl+alt+v",
+        "command": "open-in-vim.open"
+    },
+    {
+        "key": "ctrl+alt+l c",
+        "command": "turboConsoleLog.commentAllLogMessages"
+    },
+    {
+        "key": "ctrl+alt+l shift+d",
+        "command": "turboConsoleLog.deleteAllLogMessages"
+    },
+    {
+        "key": "ctrl+alt+l d",
+        "command": "turboConsoleLog.displayLogMessage"
+    },
+    {
+        "key": "ctrl+alt+l u",
+        "command": "turboConsoleLog.uncommentAllLogMessages"
+    },
+    {
+        "key": "ctrl+alt+.",
+        "command": "workbench.action.terminal.resizePaneUp",
+        "when": "terminalFocus && terminalHasBeenCreated || terminalFocus && terminalProcessSupported"
+    },
+    {
+        "key": "ctrl+alt+,",
+        "command": "workbench.action.terminal.resizePaneDown",
+        "when": "terminalFocus && terminalHasBeenCreated || terminalFocus && terminalProcessSupported"
+    }
+]
