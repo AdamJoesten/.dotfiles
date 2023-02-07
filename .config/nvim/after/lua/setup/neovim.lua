@@ -12,7 +12,7 @@ vim.opt.number = true
 vim.opt.relativenumber = true
 -- vim.opt.lisp = true
 
-vim.g.mapleader = ';'
+vim.g.mapleader = ' '
 vim.keymap.set({'n', 'i', 'v'}, '<UP>', '<ESC>')
 vim.keymap.set({'n', 'i', 'v'}, '<RIGHT>', '<ESC>')
 vim.keymap.set({'n', 'i', 'v'}, '<LEFT>', '<ESC>')
