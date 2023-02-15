@@ -1,2 +1,3 @@
-require('install')
-require('setup')
+vim.g.mapleader = " "
+require("config.lazy")
+require("config")
