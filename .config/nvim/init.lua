@@ -9,9 +9,19 @@ if not vim.loop.fs_stat(lazypath) then
     lazypath,
   })
 end
-vim.opt.rtp:prepend(lazypath)
+vim.opt.rtp:prepend(lazypath) -- The above bootstraps lazy.nvim
 
 vim.g.mapleader = " " -- make sure to set `mapleader` before lazy so your mappings are correct
-require("lazy").setup({{ import = "plugins" }}, { defaults = { lazy = true, version = "*" }})
-require("nvim")
-require("config")
+require("lazy").setup(
+    {
+        { import = "plugins" } -- Install and import neovim plugin configs to lazy.nvim
+    },
+    {
+        defaults = {
+            lazy = true,
+            version = "*" -- enable this to try installing the latest stable versions of plugins
+        }
+    }
+)
+require("nvim") -- Import neovim specific config
+require("config") -- Import plugin specific configuration and customization
