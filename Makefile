@@ -2,9 +2,9 @@
 DOTFILES_DIR := $(shell dirname $(realpath $(firstword $(MAKEFILE_LIST))))
 STOW_PKGS := git lang_c_cxx lang_node lang_python lang_rust nvim shell
 
-.PHONY: all fs apt flatpak rust node buildtools fonts hw gui stow clean
+.PHONY: all fs apt flatpak rust node python buildtools fonts hw gui stow clean
 
-all: fs apt flatpak rust node buildtools fonts hw gui stow
+all: fs apt flatpak rust node python buildtools fonts hw gui stow
 
 fs:
 	@echo "=> Establishing local filesystem..."
@@ -25,6 +25,10 @@ rust: apt
 node: apt
 	@echo "=> Ensuring Node.js & pnpm..."
 	@bash $(DOTFILES_DIR)/scripts/04-node-install.sh
+
+python: apt
+	@echo "=> Ensuring Python toolchain (uv)..."
+	@bash $(DOTFILES_DIR)/scripts/10-python-install.sh
 
 stow:
 	@echo "=> Stowing packages to $(HOME)..."
