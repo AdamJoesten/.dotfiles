@@ -6,7 +6,6 @@ echo "=> Establishing Local Filesystem..."
 DIRS=(
     "$HOME/.local/bin"
     "$HOME/.local/share"
-    "$HOME/.local/opt"
     "$HOME/.local/state"
     "$HOME/.config"
     "$HOME/.cache"
