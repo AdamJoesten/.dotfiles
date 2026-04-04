@@ -2,7 +2,7 @@
 set -euo pipefail
 
 # Dotfiles stowing script
-# Usage: ./03-stow-link.sh pkg1 pkg2 ...
+# Usage: ./stow_pkgs.sh pkg1 pkg2 ...
 
 DOTFILES_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 TARGET_DIR="$HOME"
