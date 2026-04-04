@@ -1,0 +1,28 @@
+[user]
+    name = Adam Joesten
+    
+[core]
+    editor = nvim
+    excludesfile = ~/.config/git/ignore
+    pager = delta
+
+[init]
+    defaultBranch = main
+
+[pull]
+    rebase = true
+
+[fetch]
+    prune = true
+
+[include]
+    path = ~/.config/git/config.local
+
+[interactive]
+    diffFilter = delta --color-only
+
+[delta]
+    navigate = true
+
+[merge]
+    conflictStyle = zdiff3
