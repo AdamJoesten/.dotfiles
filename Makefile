@@ -2,9 +2,9 @@
 DOTFILES_DIR := $(shell dirname $(realpath $(firstword $(MAKEFILE_LIST))))
 STOW_PKGS := git lang_c_cxx lang_node lang_python lang_rust nvim shell
 
-.PHONY: all fs apt flatpak rust node python buildtools fonts hw gui stow clean
+.PHONY: all fs apt flatpak rust node python buildtools fonts hw gui nvim stow clean
 
-all: fs apt flatpak rust node python buildtools fonts hw gui stow
+all: fs apt flatpak rust node python buildtools fonts hw gui nvim stow
 
 fs:
 	@echo "=> Establishing local filesystem..."
@@ -50,7 +50,11 @@ gui: flatpak
 	@echo "=> Installing GUI Applications..."
 	@bash $(DOTFILES_DIR)/scripts/09-gui-apps-install.sh
 
-clean:
+nvim: apt
+	@echo "=> Ensuring Neovim (Unstable)..."
+	@bash $(DOTFILES_DIR)/scripts/11-nvim-install.sh
+
+stow:
 	@echo "=> Removing stowed symlinks..."
 	@for pkg in $(STOW_PKGS); do \
 		stow -D -t $(HOME) -d $(DOTFILES_DIR) $$pkg; \
