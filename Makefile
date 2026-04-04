@@ -5,7 +5,7 @@ DOTFILES_DIR := $(shell dirname $(realpath $(firstword $(MAKEFILE_LIST))))
 SCRIPTS_DIR := $(DOTFILES_DIR)/scripts
 
 # Auto-discover stow packages (directories that aren't .git, scripts, or build artifacts)
-EXCLUDE_DIRS := .git scripts
+EXCLUDE_DIRS := .git scripts hardware
 STOW_PKGS := $(shell find . -maxdepth 1 -type d ! -name ".*" $(foreach dir,$(EXCLUDE_DIRS),! -name "$(dir)") -printf '%f\n')
 
 .PHONY: all fs apt flatpak rust node python buildtools fonts hw gui nvim stow unstow help sync
