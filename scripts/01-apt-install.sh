@@ -34,8 +34,20 @@ PACKAGES=(
     "zlib1g-dev"                 # Zlib development headers (required to compile libgit2/git-delta)
 )
 
+# 0. Apt Cache Management
+CACHE_DIR="$HOME/.cache/dotfiles"
+mkdir -p "$CACHE_DIR"
+LAST_UPDATE="$CACHE_DIR/apt_update_last"
+
+# Only update if last update was > 3600 seconds ago or doesn't exist
 echo "=> Syncing system repositories..."
-sudo apt-get update -qq
+if [ ! -f "$LAST_UPDATE" ] || [ $(($(date +%s) - $(stat -c %Y "$LAST_UPDATE"))) -gt 3600 ]; then
+    sudo apt-get update -qq
+    touch "$LAST_UPDATE"
+else
+    echo "   [Skip] Apt cache is fresh (less than 1 hour old)."
+fi
+
 sudo apt-get install -y -qq "${PACKAGES[@]}"
 
 # Pinned LLVM/Clang Toolchain

@@ -57,8 +57,12 @@ npm install -g corepack@latest --quiet
 corepack enable --install-directory "$PNPM_HOME" pnpm
 
 # 5. Global Tools
-echo "=> Syncing global CLI tools..."
-pnpm install -g @google/gemini-cli --silent
+if ! command -v gemini >/dev/null 2>&1; then
+    echo "=> Syncing global CLI tools..."
+    pnpm install -g @google/gemini-cli --silent
+else
+    echo "=> gemini-cli is already present. Skipping pnpm install."
+fi
 
 # 7. Verification
 echo "=> Verifying installations:"

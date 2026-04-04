@@ -12,14 +12,19 @@ if [ ! -f "$RULES_FILE" ]; then
     exit 1
 fi
 
-echo "   Requesting sudo privileges to copy rules to /etc/udev/rules.d/..."
-sudo cp "$RULES_FILE" "$TARGET_FILE"
-sudo chown root:root "$TARGET_FILE"
-sudo chmod 644 "$TARGET_FILE"
+# 1. State Reconciliation Check (Idempotency)
+if [ -f "$TARGET_FILE" ] && cmp -s "$RULES_FILE" "$TARGET_FILE"; then
+    echo "   [Skip] ZSA rules are already up to date in /etc/udev/rules.d/."
+else
+    echo "   Updating rules in /etc/udev/rules.d/..."
+    sudo cp "$RULES_FILE" "$TARGET_FILE"
+    sudo chown root:root "$TARGET_FILE"
+    sudo chmod 644 "$TARGET_FILE"
 
-echo "   Reloading udev rules..."
-sudo udevadm control --reload-rules
-sudo udevadm trigger
+    echo "   Reloading udev rules..."
+    sudo udevadm control --reload-rules
+    sudo udevadm trigger
+fi
 
 echo "   Ensuring user is in 'plugdev' group..."
 if ! getent group plugdev >/dev/null; then
