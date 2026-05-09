@@ -10,7 +10,7 @@ mkdir -p "$LOCAL_BIN" "$XDG_DATA_HOME"
 
 # LOCK THE VERSIONS HERE
 CMAKE_VER="4.3.1"
-ZIG_VER="0.15.2"
+# ZIG_VER="0.15.2"
 
 # Helper to check version
 check_version() {
@@ -42,25 +42,25 @@ install_cmake() {
     ln -sf "$bin_path" "$LOCAL_BIN/cmake"
 }
 
-install_zig() {
-    local target_dir="$XDG_DATA_HOME/zig-$ZIG_VER"
-    local bin_path="$target_dir/zig"
+# install_zig() {
+#     local target_dir="$XDG_DATA_HOME/zig-$ZIG_VER"
+#     local bin_path="$target_dir/zig"
 
-    if check_version "$bin_path" "$ZIG_VER"; then
-        echo "   [Skip] Zig $ZIG_VER is already pinned (XDG)."
-    else
-        echo "=> Pinning Zig $ZIG_VER (XDG)..."
-        rm -rf "$target_dir"
-        local url="https://ziglang.org/download/$ZIG_VER/zig-linux-x86_64-$ZIG_VER.tar.xz"
-        curl -fsSL "$url" | tar -xJ -C "$XDG_DATA_HOME"
-        mv "$XDG_DATA_HOME/zig-linux-x86_64-$ZIG_VER" "$target_dir"
-    fi
-    ln -sf "$bin_path" "$LOCAL_BIN/zig"
-}
+#     if check_version "$bin_path" "$ZIG_VER"; then
+#         echo "   [Skip] Zig $ZIG_VER is already pinned (XDG)."
+#     else
+#         echo "=> Pinning Zig $ZIG_VER (XDG)..."
+#         rm -rf "$target_dir"
+#         local url="https://ziglang.org/download/$ZIG_VER/zig-linux-x86_64-$ZIG_VER.tar.xz"
+#         curl -fsSL "$url" | tar -xJ -C "$XDG_DATA_HOME"
+#         mv "$XDG_DATA_HOME/zig-linux-x86_64-$ZIG_VER" "$target_dir"
+#     fi
+#     ln -sf "$bin_path" "$LOCAL_BIN/zig"
+# }
 
 echo "=> Syncing C/C++ Build Ecosystem..."
 install_cmake &
-install_zig &
+# install_zig &
 wait
 
 echo "=> Build toolchain sync complete (XDG Aligned)."

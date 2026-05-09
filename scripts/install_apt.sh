@@ -45,7 +45,9 @@ if ! command -v "clang-$CLANG_VERSION" >/dev/null 2>&1; then
     wget -qO- https://apt.llvm.org/llvm-snapshot.gpg.key | sudo tee /etc/apt/trusted.gpg.d/apt.llvm.org.asc > /dev/null
     sudo add-apt-repository "deb http://apt.llvm.org/${CODENAME}/ llvm-toolchain-${CODENAME}-$CLANG_VERSION main" -y
     sudo apt-get update -qq
-    sudo apt-get install -y "clang-$CLANG_VERSION" "clangd-$CLANG_VERSION" "lld-$CLANG_VERSION" "lldb-$CLANG_VERSION"
+    sudo apt-get install -y "clang-$CLANG_VERSION" "clangd-$CLANG_VERSION" \
+                            "lld-$CLANG_VERSION" "lldb-$CLANG_VERSION" \
+                            "libc++-$CLANG_VERSION-dev" "libc++abi-$CLANG_VERSION-dev"
 fi
 
 # 4. Canonical Symlinking (LLVM as Default)
